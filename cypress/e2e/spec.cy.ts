@@ -1,8 +1,6 @@
 const searchText :string = "hello";
 const movieTitle :string = "Hello world";
 const pathToPoster :string = "image";
-// anpassa testet efter den "mockade" api anropet
-
 
 
 const movies :{} = {Search:[
@@ -35,8 +33,9 @@ beforeEach (()=> {
   cy.visit('http://localhost:1234');
   cy.intercept("GET", "http://omdbapi.com/*", movies).as("moviesCall");
 });
+
 // bättre namn i describtion
-describe('userexperience for search functionality', () => {
+describe('userexperience flow', () => {
   it('should be able to type', () => {
 
     cy.get("input").type(searchText).should("have.value", searchText);
@@ -61,7 +60,7 @@ describe('userexperience for search functionality', () => {
 
 });
 
-// lägg fake API anroppet i en beforeEach((=>{})) innan alla "its"
+
 describe("API call", ()=> {
   it("should get fake data", ()=> {
     cy.intercept("GET", "http://omdbapi.com/?apikey=416ed51a&s=", movies).as("moviesCall");
